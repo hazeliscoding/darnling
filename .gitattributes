@@ -1,0 +1,6 @@
+# Normalize to LF everywhere.
+* text=auto eol=lf
+
+*.png binary
+*.webp binary
+*.ttf binary
