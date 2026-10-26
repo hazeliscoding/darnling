@@ -1,6 +1,6 @@
 # Roadmap
 
-Darnling is a web app that shows a sticker on every background, fills its see-through gaps, and exports it for every place you post. This file tracks the decisions already made, what gets built in what order, and what's out of scope.
+Mendmoth is a web app that shows a sticker on every background, fills its see-through gaps, and exports it for every place you post. This file tracks the decisions already made, what gets built in what order, and what's out of scope.
 
 ## Architecture characteristics
 
@@ -12,13 +12,13 @@ What the design must protect. Everything else gets ordinary good design.
 
 ## Decisions (2026-10-24)
 
-- **Build Darnling.** It's the owner's own job: Calla's stay-put sticker is kept out of Staypaw's README, and Sweepling waits to use Primrose's still-sipping sticker, both because of see-through gaps. Web and GitHub searches found tools that resize or preview stickers, and none that finds and fills gaps inside one. This gives up time on the other app ideas.
-- **The name is Darnling:** darning mends holes, and it sounds like "darling". On 2026-10-24 it had no GitHub repos and no app was found; `darnling.app` had no DNS, and `darnling.com` is registered. Trademarks aren't checked. This gives up Mendpup, the runner-up.
+- **Build Mendmoth.** It's the owner's own job: Calla's stay-put sticker is kept out of Staypaw's README, and Sweepling waits to use Primrose's still-sipping sticker, both because of see-through gaps. Web and GitHub searches found tools that resize or preview stickers, and none that finds and fills gaps inside one. This gives up time on the other app ideas.
+- **The name is Darnling:** darning mends holes, and it sounds like "darling". On 2026-10-24 it had no GitHub repos and no app was found; `darnling.app` had no DNS, and `darnling.com` is registered. Trademarks aren't checked. This gives up Mendpup, the runner-up. *(Superseded: the name is Mendmoth, under Decisions (2026-10-26).)*
 - **Private, faithful and fast** are the characteristics above. This gives up offline use (a service worker) and proven accuracy as top-three goals; both get ordinary good design.
-- **A hole is a see-through area that the outside can't reach.** A pixel counts as see-through under 50% opacity (alpha below 128). Darnling fills the see-through area inward from the image's border, and whatever see-through pixels the fill can't reach are holes. A prototype on 2026-10-24 found exactly the real problems: 2 holes in `stay-put.png` (352 and 129 px) and 1 in `still-sipping.png` (442 px), all inside the white border. This gives up two things:
+- **A hole is a see-through area that the outside can't reach.** A pixel counts as see-through under 50% opacity (alpha below 128). Mendmoth fills the see-through area inward from the image's border, and whatever see-through pixels the fill can't reach are holes. A prototype on 2026-10-24 found exactly the real problems: 2 holes in `stay-put.png` (352 and 129 px) and 1 in `still-sipping.png` (442 px), all inside the white border. This gives up two things:
   - **Slivers that reach the outside through a narrow neck** get a "check this" warning, never a fill. Closing gaps of 2 px added about 40 px per sticker, but at 3 px the prototype flagged 237 px between Primrose's hip and her mug, which is meant to be open.
   - **Faint pixels are ignored:** about 1,400 per sticker are a little see-through inside the art, at a median opacity of 253 of 255, which nobody can see.
-- **Darnling mends holes in a copy, with the sticker's border colour.** A real die-cut sticker shows its white vinyl through such a gap, so the border colour (white on both mascots) is what the eye expects. You approve each fill against the before view, and the original file is never written. This gives up a seamless fill from the colours around the hole, which can smear an outline or skin tone into a spot that should read as backing, and gives up a smaller flag-only first version.
+- **Mendmoth mends holes in a copy, with the sticker's border colour.** A real die-cut sticker shows its white vinyl through such a gap, so the border colour (white on both mascots) is what the eye expects. You approve each fill against the before view, and the original file is never written. This gives up a seamless fill from the colours around the hole, which can smear an outline or skin tone into a spot that should read as backing, and gives up a smaller flag-only first version.
 - **Vite and plain TypeScript, with no UI framework.** Canvas 2D draws the previews. The hole finder is a pure function over RGBA pixels, tested with Vitest, and runs in a Web Worker so a large PNG never freezes the page. It's one screen: drop a file, a preview grid, a hole list and export. Fewer dependencies also keep the privacy promise easy to check. This gives up Angular, which the owner already uses in AniMatch and the portfolio.
 - **Hosted on Vercel,** the owner's call; Claude recommended GitHub Pages. It's a static build only: no Vercel Functions, no Web Analytics, no Speed Insights. This gives up hosting beside the repo with no second account, and takes on keeping Vercel's opt-in extras off.
 - **Free and open source, in a public repo under Apache-2.0,** like Staypaw and Sweepling. A privacy promise is easiest to trust when anyone can read the code, and the Lev-style plan is free apps that build an audience, with character art as the paid layer. This gives up a paid tier.
@@ -26,8 +26,12 @@ What the design must protect. Everything else gets ordinary good design.
 - **A web app only, not a step in anime-pipeline,** the owner's call. The core can be shaped for the browser alone. This gives up catching a hole the moment anime-pipeline makes a sticker.
 - **Export targets come from the owner's own list:** GitHub READMEs, Discord, Telegram, LINE, socials and the blog. *Claude's call.* Third-party sites disagree about the sizes (Discord emoji at 128 or 256 px, for one), so every preset's numbers are checked against the platform's own docs and dated here before it's built (M4).
 - **Light halos at the edge, stray pixels, and adding a die-cut border are Later.** *Claude's call*, to keep 0.1 on holes, the job no other tool does. Photoshop's matting tools already fix halos. This gives up a fuller cleanup in one place.
-- **The README shows Calla's and Primrose's real stickers,** with their holes marked, on GitHub's dark background. Both are Apache-2.0 in their own repos. The "after" column stays words until Darnling makes the mended image itself (M3). This gives up a filled "after" picture for now.
+- **The README shows Calla's and Primrose's real stickers,** with their holes marked, on GitHub's dark background. Both are Apache-2.0 in their own repos. The "after" column stays words until Mendmoth makes the mended image itself (M3). This gives up a filled "after" picture for now.
 - **The brand is a placeholder:** a heart with a woven darn patch, in `docs/brand/`, with Fredoka SemiBold lockups built by `scripts/make_lockup.py`, as in Staypaw. A mascot with a darning needle, and the real logo, come later from a claude.ai design project.
+
+## Decisions (2026-10-26)
+
+- **The name is Mendmoth.** The owner's call: Darnling sounded too close to Sweepling. Moths eat holes in cloth and this one mends them, so the name says the job, and the mascot to come is a moth with a darning needle. On 2026-10-26 nothing called Mendmoth was on GitHub or in a web search, and neither `mendmoth.com` nor `mendmoth.app` was registered. Trademarks aren't searched yet. This gives up the pun on "darling", and the runner-up again, Mendpup, whose pup sits close to Staypaw's paw.
 
 ## M0: Placeholder (as soon as possible)
 
@@ -64,7 +68,7 @@ What the design must protect. Everything else gets ordinary good design.
 - [ ] Detect the border colour: the commonest opaque colour touching the outside. You can pick another.
 - [ ] Approve or skip each hole, with a before and after toggle on every background.
 - [ ] Download the mended copy as a PNG.
-- [ ] The README's "after" column shows Darnling's own mended stickers.
+- [ ] The README's "after" column shows Mendmoth's own mended stickers.
 
 **Done when:** a test re-runs the finder on both mended stickers and finds no holes, every pixel outside the approved holes is byte-identical to the original, and nothing writes to the original file.
 
@@ -88,7 +92,7 @@ The OSS launch gates:
 - [ ] Issues are ready for reports.
 - [ ] A code-review agent reads the code before the release.
 
-**Done when:** every box above is ticked and Calla's stay-put sticker, mended by Darnling, is back in Staypaw's README.
+**Done when:** every box above is ticked and Calla's stay-put sticker, mended by Mendmoth, is back in Staypaw's README.
 
 ## Later
 
@@ -98,7 +102,7 @@ The OSS launch gates:
 - Add a die-cut border to art that has none.
 - Many files at once.
 - Works offline, through a service worker.
-- `darnling.app`, if it's still free.
+- `mendmoth.app`, if it's still free.
 
 ## Not planned
 
@@ -109,4 +113,4 @@ The OSS launch gates:
 
 ## How we'll know it works
 
-A dogfooding log: every sticker the owner posts goes through Darnling first, and a hole that shows after posting is a miss. Misses must stay at zero. After 0.1, public signals: issues and pull requests from strangers, and people mending stickers without asking for help.
+A dogfooding log: every sticker the owner posts goes through Mendmoth first, and a hole that shows after posting is a miss. Misses must stay at zero. After 0.1, public signals: issues and pull requests from strangers, and people mending stickers without asking for help.

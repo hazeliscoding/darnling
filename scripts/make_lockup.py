@@ -1,4 +1,4 @@
-"""Build docs/brand/lockup.svg and lockup-dark.svg: the heart mark plus the "darnling" wordmark, outlined.
+"""Build docs/brand/lockup.svg and lockup-dark.svg: the heart mark plus the "mendmoth" wordmark, outlined.
 
 Usage, from the repo root:
   uv run --no-project --with fonttools --with uharfbuzz python -I scripts/make_lockup.py <Fredoka-SemiBold.ttf> docs/brand
@@ -46,7 +46,7 @@ gs = font.getGlyphSet()
 
 hbfont = hb.Font(hb.Face(hb.Blob.from_file_path(str(font_path))))
 buf = hb.Buffer()
-buf.add_str("darnling")
+buf.add_str("mendmoth")
 buf.guess_segment_properties()
 hb.shape(hbfont, buf, {"kern": True, "liga": True})
 order = font.getGlyphOrder()
@@ -94,7 +94,7 @@ for source, name in (("mark.svg", "lockup.svg"), ("mark-dark.svg", "lockup-dark.
     body, ink = mark(source)
     svg = (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{n(W)}" height="{n(H)}" viewBox="0 0 {n(W)} {n(H)}" '
-        f'role="img" aria-label="Darnling"><title>Darnling</title>'
+        f'role="img" aria-label="Mendmoth"><title>Mendmoth</title>'
         f'<g transform="translate({n(-x0)} {n(-y0)})">'
         f'<g fill="none" transform="translate({n(mx)} {n(my)}) scale({m:.5f})">{body}</g>'
         f'<path d="{word_d}" fill="{ink}"/>'

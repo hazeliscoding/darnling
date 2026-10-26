@@ -1,6 +1,6 @@
 # AGENTS.md
 
-These are the working rules for agents in this repo. Darnling is a web app (Vite, plain TypeScript, Canvas 2D, Apache-2.0) that shows a sticker on every background, fills its see-through gaps, and exports it for every place you post. It runs entirely in the browser.
+These are the working rules for agents in this repo. Mendmoth is a web app (Vite, plain TypeScript, Canvas 2D, Apache-2.0) that shows a sticker on every background, fills its see-through gaps, and exports it for every place you post. It runs entirely in the browser.
 
 ## Sources of truth
 
@@ -10,7 +10,7 @@ These are the working rules for agents in this repo. Darnling is a web app (Vite
 
 ## The privacy promise (hard rules)
 
-People drop unreleased art into Darnling. They'll only do that if nothing can leave the page, so never break these, not even in dev tooling that ships.
+People drop unreleased art into Mendmoth. They'll only do that if nothing can leave the page, so never break these, not even in dev tooling that ships.
 
 - **No network calls from the app.** No `fetch`, `XMLHttpRequest`, `WebSocket`, `EventSource` or `navigator.sendBeacon`, and no package that makes them. A guardrail test fails on any of these in `src/`, and the Content-Security-Policy in `index.html` keeps `connect-src 'none'` as a second lock. Loading the page is the only traffic.
 - **No third-party origins.** No CDN scripts, web fonts, images or iframes from another origin: bundle or self-host them. A test fails on another origin's URL in the built `dist/`. Every outside request tells someone that the page was opened.
@@ -48,7 +48,7 @@ One meaning per term. Use these words in code, docs and commits.
 
 - **See-through:** a pixel under 50% opacity (alpha below 128).
 - **Outside:** the see-through area connected to the image's border.
-- **Hole:** see-through pixels the outside can't reach. Darnling fills these, once approved.
+- **Hole:** see-through pixels the outside can't reach. Mendmoth fills these, once approved.
 - **Sliver:** a see-through area that reaches the outside through a neck of 2 px or less. It gets a warning, never a fill.
 - **Border colour:** the commonest opaque colour touching the outside, usually a sticker's white die-cut edge. Holes are filled with it.
 - **Mend:** filling approved holes in the copy.
